@@ -1,0 +1,54 @@
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit User</h1>
+    
+    <form action="/admin/edit/{{user._id}}" method="POST" class="p-4 border rounded shadow-sm bg-light" onsubmit="login(event)">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" name="name" value="{{user.name}}" class="form-control" >
+            <span id="name_error" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="text" id="email" name="email" value="{{user.email}}" class="form-control" >
+            <span id="email_error" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Update</button>
+        <div>{{message}}</div>
+    </form>
+</div>
+<script>
+  let email=document.getElementById('email')
+  let email_error=document.getElementById("email_error")
+  let pattern = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+  let name=document.getElementById('name')
+  let name_error=document.getElementById("name_error")
+
+  function login(event){
+    if(name.value.trim()==""||name.value.trim()==null){
+        name_error.innerHTML='name is required'
+         event.preventDefault();
+    }else if (/\d/.test(name.value.trim())) {  
+        name_error.innerHTML = 'Name should not contain numbers';
+        event.preventDefault();
+    }
+    else{
+        name_error.innerHTML=''
+    }
+    if(email.value==''||email.value==null){
+      email_error.innerHTML='email is required'
+       event.preventDefault();
+      
+    }else if(!(pattern.test(email.value))){
+      email_error.innerHTML='enter a valid email'
+      event.preventDefault();
+      
+    }else{
+      email_error.innerHTML=''
+    
+    
+  }
+  }
+</script>

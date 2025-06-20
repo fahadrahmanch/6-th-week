@@ -1,0 +1,105 @@
+
+<main class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4" style="width: 100%; max-width: 400px;">
+    <form action="/user/register" method="post" onsubmit="login(event)">
+
+      <h2 class="text-center mb-4">Register</h2>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" type="text" class="form-control" placeholder="Enter your name" name="name" />
+        <span id="name_error" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="text" class="form-control" placeholder="Enter Email" name="email" />
+        <span id="email_error" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" type="password" class="form-control" placeholder="Enter Password" name="password" />
+        <span id="password_error" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmpassword" class="form-label">Confirm Password</label>
+        <input id="confirmpassword" type="password" class="form-control" placeholder="Confirm Password" name="confirm password" />
+        <span id="confirmpassword_error" class="text-danger"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">SIGN IN</button>
+      <div style="color: red;">{{message}}</div>
+      <div class="mt-3 text-center">
+        <a href="/user/login">Already have an account?</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+   
+  let email=document.getElementById('email')
+  let name=document.getElementById('name')
+  let password=document.getElementById('password')
+  let confirmpassword=document.getElementById('confirmpassword')
+  let email_error=document.getElementById("email_error")
+  let pattern = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+  let password_error=document.getElementById("password_error")
+  let confirmpassord_error=document.getElementById("confirmpassword_error")
+  function login(event){
+      if(name.value.trim()==''||name.value.trim()==null){
+      name_error.innerHTML='name is required'
+       event.preventDefault();
+      
+    }else if (/\d/.test(name.value.trim())) {  
+        name_error.innerHTML = 'Name should not contain numbers';
+        event.preventDefault();
+    }
+    else{
+      name_error.innerHTML=''
+    }
+    if(email.value==''||email.value==null){
+      email_error.innerHTML='email is required'
+       event.preventDefault();
+      
+    }else if(!(pattern.test(email.value))){
+      email_error.innerHTML='enter a valid email'
+      event.preventDefault();
+      
+    }else{
+      email_error.innerHTML=''
+    }
+    if(password.value==''||password.value==null){
+      password_error.innerHTML='password is required';
+      event.preventDefault();
+      
+    }else if(password.value.length<8){
+      password_error.innerHTML='Password must be at least 8 characters long.'
+       event.preventDefault();
+      
+    }else{
+      password_error.innerHTML=''
+    }
+    if(password.value==''||password.value==null){
+      password_error.innerHTML='password is required';
+      event.preventDefault();
+      
+    }
+    if(password.value!=confirmpassword.value){
+      confirmpassword_error.innerHTML='password do not match'
+       event.preventDefault();
+    }
+  
+  else if(confirmpassword.value.trim()==''||confirmpassword.value.trim()==null){
+    confirmpassword_error.innerHTML='confirm password is required';
+      event.preventDefault();
+      
+    }else{
+      confirmpassword_error='';
+    }
+ 
+
+  } 
+</script>

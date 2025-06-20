@@ -1,0 +1,38 @@
+
+<link rel="stylesheet" href="/styles/dashboard.css">
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Dashboard</a>
+    <form class="d-flex" role="search" action="/admin/search" method="get">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+      <button class="btn btn-outline-dark Custombtn" type="submit">SEARCH</button>
+      <a href="/admin/logout" class="btn btn-outline-dark Custombtn">LOG OUT</a>
+    </form>
+    <a href="/admin/addUser/{{this._id}}" class="btn btn-outline-dark Custombtn">ADD USER</a>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <table class="table table-striped">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      <tr class="text-center">
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>
+          <a href="/admin/edit/{{this._id}}" class="btn btn-primary btn-sm">EDIT</a>
+          <a href="/admin/delete/{{this._id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">DELETE</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

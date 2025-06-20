@@ -1,0 +1,76 @@
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Add User</h1>
+
+    <form action="/admin/adduser" method="POST" class="border p-4 shadow-sm rounded bg-light" onsubmit="loginn(event)">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="namee" name="name" value="{{user.name}}" >
+            <span id="name_error" class="text-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="text" class="form-control" id="emaill" name="email" value="{{user.email}}" >
+            <span id="email_error" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="passwordd" name="password" value="{{user.password}}" >
+            <span id="password_error" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Update</button>
+        <div style="color: red;">{{message}}</div>
+    </form>
+</div>
+<script>
+  let email=document.getElementById('emaill')
+  let password=document.getElementById('passwordd')
+  let name=document.getElementById('namee')
+  
+  let pattern = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  let email_error=document.getElementById("email_error")
+  let password_error=document.getElementById("password_error")
+  let name_error=document.getElementById("name_error")
+
+  function loginn(event){
+    
+    if(name.value.trim()==""||name.value.trim()==null ){
+        name_error.innerHTML='name is required'
+        event.preventDefault();
+    
+    } else if (/\d/.test(name.value.trim())) {  
+        name_error.innerHTML = 'Name should not contain numbers';
+        event.preventDefault();
+    }
+    else{
+        name_error.innerHTML=''
+    }
+    if(email.value==''||email.value==null){
+      email_error.innerHTML='email is required'
+       event.preventDefault();
+      
+    }else if(!(pattern.test(email.value.trim()))){
+      email_error.innerHTML='enter a valid email';
+      event.preventDefault();
+      
+    }else{
+      email_error.innerHTML=''
+    }
+    if(password.value==''||password.value==null){
+      password_error.innerHTML='password is required';
+      event.preventDefault();
+      
+    }else if(password.value.length<8){
+      password_error.innerHTML='Password must be at least 8 characters long.'
+       event.preventDefault();
+      
+    }else{
+      password_error.innerHTML=''
+    }
+    
+  }
+</script>
